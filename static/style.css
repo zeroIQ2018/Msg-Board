@@ -1,0 +1,17 @@
+table {
+  border-collapse: collapse;
+}
+tr { 
+  border: solid;
+  border-width: 15x 
+}
+td{
+    border: solid;
+    border-width: 15x;
+}
+
+#remove {
+    border-color: white;
+    background-color: white;
+    border-inline-color: white;
+}

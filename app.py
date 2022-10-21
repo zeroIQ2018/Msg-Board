@@ -1,4 +1,3 @@
-from email import message
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 import datetime
@@ -20,16 +19,7 @@ class Message(db.Model):
         self.message = message
         self.username = username
 
-    def __repr__(self):
-        return "<Message %r>" % self.username
 
-
-
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-    
 
 @app.route("/add_message", methods=["POST"])
 def add_message():
@@ -37,6 +27,14 @@ def add_message():
     db.session.add(message)
     db.session.commit()
     return redirect(url_for("index"))
+
+@app.route("/", methods=['POST', 'GET'])
+def index():
+    posts = Message.query.all()
+    return render_template("index.html", posts=posts)
+    
+
+
 
 
 if __name__ == "__main__":
