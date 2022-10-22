@@ -9,41 +9,33 @@
     <h1>Message Board</h1>
 
     <body>
-        <form method="POST" action="/add_message">
+        <form method="POST" action="/add_message" id="form">
             <label>Message:</label>
-            <input type="text" id="usernameinput" name="Username">
+            <input type="text" id="usernameinput" name="Username" required>
             <label>Username:</label>
-            <input type="text" id="messageinput" name="Content">
+            <input type="text" id="messageinput" name="Content" required>
             <input type="submit">
        </form>
     
 
-
+    <div id="submissions">
     <h2>Posts:</h2>
     <br>
 
-    <table>
-    {% for post in posts %}
-    <tr>
-        <td>Username: </td>
-        <td>
-        {{post.username}}<br>
-        </td>
-    </tr>
-    <tr>
-        <td>Message:</td>
-        <td>
-            {{post.message}}<br>
-        </td>
-    </tr>
-    <tr id="remove">
-        <td id="remove"></td>
-    </tr>
-
     
-    <p></p>
-    {% endfor %}
+    {% for post in posts %}
+    <table id="gets">
+        <tr>
+            <td>{{post.message}}:</td>
+            <td>{{post.username}}</td>
+        </tr>
+        <br>
     </table>
+    {% endfor %}
+    </div>
+
+
+    <script src="{{ url_for('static', filename='indexjs.js') }}"></script>
     </body>
 </html>
 <html>
