@@ -32,8 +32,18 @@ def add_message():
 def index():
     posts = Message.query.all()
     return render_template("index.html", posts=posts)
-    
 
+
+@app.route("/admin" )
+def admin():
+    return render_template("admin.html")
+
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    db.session.query(Message).delete()
+    db.session.commit()
+    return redirect(url_for("admin"))
 
 
 
