@@ -10,10 +10,10 @@
 
     <body>
         <form method="POST" action="/add_message" id="form">
-            <label>Message:</label>
-            <input type="text" id="usernameinput" name="Username" required>
             <label>Username:</label>
             <input type="text" id="messageinput" name="Content" required>
+            <label>Message:</label>
+            <input type="text" id="usernameinput" name="Username" required>
             <input type="submit">
        </form>
     
@@ -26,8 +26,8 @@
     {% for post in posts %}
     <table id="gets">
         <tr>
-            <td>{{post.message}}:</td>
-            <td>{{post.username}}</td>
+            <td>{{post.username}}:</td>
+            <td>{{post.message}}</td>
         </tr>
         <br>
     </table>
