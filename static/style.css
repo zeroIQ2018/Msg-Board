@@ -1,3 +1,17 @@
+p{
+  font:13px/1.231 arial,helvetica,clean,sans-serif;
+}
+
+
+body {
+  background:#ffe url(/image/fp/fade.png) top repeat-x;
+  color:#800
+}
+
+html {
+  background-color: #ffe;
+}
+
 table {
   border-collapse: collapse;
 }
@@ -33,3 +47,18 @@ td{
   text-align: center;
 
 }
+
+#sub {
+  color: #789922;
+  background-color: #ffe;
+}
+
+
+#killyourselfrightnow{
+  outline: 2px groove #800;
+  justify-content: center;
+  width: 25%;
+  margin: 0 auto;
+}
+
+
