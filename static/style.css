@@ -4,11 +4,12 @@ p{
 
 
 body {
-  background:#ffe url(/image/fp/fade.png) top repeat-x;
+  
   color:#800
 }
 
 html {
+  background:#ffe url(fade.png) top repeat-x;
   background-color: #ffe;
 }
 
@@ -57,7 +58,7 @@ td{
 #killyourselfrightnow{
   outline: 2px groove #800;
   justify-content: center;
-  width: 25%;
+  width: 20%;
   margin: 0 auto;
 }
 

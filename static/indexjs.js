@@ -17,7 +17,7 @@ document.getElementById("form").onsubmit = function(){
 
 	if(!(checkEmpty(document.getElementById("usernameinput").value || document.getElementById("messageinput")))){
 		alert("Fill the field!");
-		return false; //stop the submit
+		return false; 
 	}
 
 };
