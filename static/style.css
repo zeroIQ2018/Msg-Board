@@ -41,6 +41,10 @@ td{
   
 }
 
+#datetext {
+  font-size: 10px;
+}
+
 #gets{
   text-align: center;
   margin-left: auto;
