@@ -21,3 +21,18 @@ document.getElementById("form").onsubmit = function(){
 	}
 
 };
+
+
+(function() // to make the thing load on reload
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
