@@ -24,6 +24,7 @@ class Message(db.Model):
 
 
 
+
 @app.route("/add_message", methods=["POST"])
 def add_message():
     message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now())
@@ -48,3 +49,5 @@ def delete():
     db.session.commit()
     return redirect(url_for("admin"))
 
+
+#edit
