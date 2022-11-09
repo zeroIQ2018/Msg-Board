@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 app.debug = False
 db = SQLAlchemy(app)
+
+
+
 
 
 class Message(db.Model):
@@ -15,19 +17,21 @@ class Message(db.Model):
     message = db.Column(db.String(50))
     username = db.Column(db.String(50))
     date_posted = db.Column(db.String(50))
+    imageurl = db.Column(db.String(50))
 
 
-    def __init__(self, username, message, date_posted):
+    def __init__(self, username, message, date_posted, imageurl):
         self.message = message
         self.username = username
         self.date_posted = date_posted
+        self.imageurl= imageurl
 
 
 
 
 @app.route("/add_message", methods=["POST"])
 def add_message():
-    message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now())
+    message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
     db.session.add(message)
     db.session.commit()
     return redirect(url_for("index"))
@@ -49,5 +53,3 @@ def delete():
     db.session.commit()
     return redirect(url_for("admin"))
 
-
-#edit
