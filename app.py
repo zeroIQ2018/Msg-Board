@@ -47,9 +47,15 @@ def admin():
     return render_template("admin.html")
 
 
+@app.route("/admin")
+def fakeadmin():
+    return render_template("fakeadmin.html")
+
+
 @app.route("/delete", methods=["POST"])
 def delete():
     db.session.query(Message).delete()
     db.session.commit()
-    return redirect(url_for("admin2"))
+    return redirect(url_for("admin"))
+
 
