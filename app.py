@@ -42,7 +42,7 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/admin" )
+@app.route("/admin2" )
 def admin():
     return render_template("admin.html")
 
@@ -51,5 +51,5 @@ def admin():
 def delete():
     db.session.query(Message).delete()
     db.session.commit()
-    return redirect(url_for("admin"))
+    return redirect(url_for("admin2"))
 
