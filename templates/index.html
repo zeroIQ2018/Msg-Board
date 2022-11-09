@@ -3,7 +3,8 @@
     <head>
         <title>Message Board</title>
         <meta charset="utf-8">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
     </head>
@@ -33,6 +34,7 @@
     <p>{{post.message}}</p>
     <p id="datetext">Posted on:{{post.date_posted}}</p>
     </div>
+    <br>
     {% endfor %}
     </div>
 
