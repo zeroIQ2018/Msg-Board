@@ -59,3 +59,9 @@ def delete():
     return redirect(url_for("admin"))
 
 
+@app.route("/deleteid", methods=["POST"])
+def deleteid():
+    id = request.form["id"]
+    row_to_delete = db.session.query(Message).filter(Message.id==id).one()
+    db.session.query(row_to_delete).delete()
+    return redirect(url_for("admin"))
