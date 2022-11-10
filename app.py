@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import os
+
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
 app.debug = False
 db = SQLAlchemy(app)
 
@@ -42,7 +45,7 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/admin2" )
+@app.route("/admin2", methods=["GET", "POST"])
 def admin():
     return render_template("admin.html")
 
@@ -59,9 +62,11 @@ def delete():
     return redirect(url_for("admin"))
 
 
-@app.route("/deleteid", methods=["POST"])
+@app.route("/deleteid", methods=["POST","GET"])
 def deleteid():
-    id = request.form["id"]
-    row_to_delete = db.session.query(Message).filter(Message.id==id).one()
-    db.session.query(row_to_delete).delete()
+    data = request.form.get('idform', 0)
+    coloumn = Message.query.filter_by(id=data).one()
+    print(coloumn)
+    db.session.query(coloumn).delete()
+    db.session.commit()
     return redirect(url_for("admin"))
