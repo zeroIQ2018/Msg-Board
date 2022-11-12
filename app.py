@@ -17,10 +17,10 @@ db = SQLAlchemy(app)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    message = db.Column(db.String(50))
-    username = db.Column(db.String(50))
-    date_posted = db.Column(db.String(50))
-    imageurl = db.Column(db.String(50))
+    message = db.Column(db.String(300))
+    username = db.Column(db.String(300))
+    date_posted = db.Column(db.String(300))
+    imageurl = db.Column(db.String(300))
 
 
     def __init__(self, username, message, date_posted, imageurl):
