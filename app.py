@@ -7,7 +7,7 @@ import datetime
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://vppilujfsfwfbe:82c4177c3e7c07709fa25801f62506bf1bfc8d42a585d48260c57ef4be64c2f8@ec2-52-211-232-23.eu-west-1.compute.amazonaws.com:5432/d9n2b1qv12ouoo"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://vppilujfsfwfbe:82c4177c3e7c07709fa25801f62506bf1bfc8d42a585d48260c57ef4be64c2f8@ec2-52-211-232-23.eu-west-1.compute.amazonaws.com:5432/d9n2b1qv12ouoo"
 app.debug = False
 db = SQLAlchemy(app)
 
@@ -17,10 +17,10 @@ db = SQLAlchemy(app)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    message = db.Column(db.String(300))
-    username = db.Column(db.String(300))
-    date_posted = db.Column(db.String(300))
-    imageurl = db.Column(db.String(300))
+    message = db.Column(db.String(500))
+    username = db.Column(db.String(500))
+    date_posted = db.Column(db.String(500))
+    imageurl = db.Column(db.String(500))
 
 
     def __init__(self, username, message, date_posted, imageurl):
