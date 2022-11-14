@@ -29,10 +29,18 @@
 
     {% for post in posts %}
     <div id="killyourselfrightnow">
+<<<<<<< Updated upstream
         <p><b>{{post.username}}:</b></p>
         <img id="imgthing" src={{post.imageurl}}>
         <p>{{post.message}}</p>
         <p id="datetext">Posted on:{{post.date_posted}}</p>
+=======
+    
+    <p><b>{{post.username}}:</b></p>
+    <img id="imgthing" src={{post.imageurl}}>
+    <p>{{post.message}}</p>
+    <p id="datetext"> Nr: {{ post.id }} Posted on:{{post.date_posted}}</p>
+>>>>>>> Stashed changes
     </div>
     <br>
     {% endfor %}
