@@ -8,21 +8,27 @@
     </head>
     <body>
         <h1>Very secure admin terminal</h1>
+
+
         <form method="POST" action="/delete"> 
-        <input type="submit" value="Press here to delete entire database"></input>
+            <input type="submit" value="Press here to delete entire database"></input>
         </form>
+
+
         <br>
+
+
         <form method="POST" action="/deleteid">
-        <label>enter which row to delete with coloumn id</label>
-        <input type="text" id="idform" name="idform">
-        <input type="submit" value="submit">
+            <label>enter which row to delete with coloumn id</label>
+            <input type="number" id="idform" name="idform">
+            <input type="submit" value="submit">
         </form>
 
         <br>
         <br>
 
         <a href="/">
-            <button>Return to main website</button>
+            <button>Return to the board website</button>
         </a>
 
     </body>

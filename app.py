@@ -73,8 +73,7 @@ def delete():
 @app.route("/deleteid", methods=["POST","GET"])
 def deleteid():
     data = request.form.get('idform', 0)
-    coloumn = Message.query.filter_by(id=data).one()
-    print(coloumn)
-    db.session.query(coloumn).delete()
+    int(data)
+    Message.query.filter(Message.id == data).delete()
     db.session.commit()
     return redirect(url_for("admin"))
