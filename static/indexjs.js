@@ -36,3 +36,19 @@ document.getElementById("form").onsubmit = function(){
       localStorage.removeItem('firstLoad');
   }
 })();
+
+
+a = document.getElementById("imgthing").src;
+
+
+/*
+function ifyoutube(){
+	if(a.startsWith("https://www.youtube.com")) 
+		{
+			console.log("Test");
+	document.getElementById("imgthing").type = "iframe";
+		}
+}
+
+window.onload = ifyoutube();
+*/

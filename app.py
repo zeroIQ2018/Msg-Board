@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 import urllib.request 
 
+
+
 def checkifinternet():
     try:
         urllib.request.urlopen('http://google.com')
@@ -12,14 +14,12 @@ def checkifinternet():
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.debug = False
+app.debug = True
 if checkifinternet() == True:
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://vppilujfsfwfbe:82c4177c3e7c07709fa25801f62506bf1bfc8d42a585d48260c57ef4be64c2f8@ec2-52-211-232-23.eu-west-1.compute.amazonaws.com:5432/d9n2b1qv12ouoo"
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
-
-
 
 
 
@@ -36,12 +36,15 @@ class Message(db.Model):
         self.username = username
         self.date_posted = date_posted
         self.imageurl= imageurl
+        
+  
 
 
 
 
 @app.route("/add_message", methods=["POST"])
 def add_message():
+
     message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
     db.session.add(message)
     db.session.commit()
@@ -58,9 +61,6 @@ def admin():
     return render_template("admin.html")
 
 
-@app.route("/admin")
-def fakeadmin():
-    return render_template("fakeadmin.html")
 
 
 @app.route("/delete", methods=["POST"])
@@ -77,3 +77,10 @@ def deleteid():
     Message.query.filter(Message.id == data).delete()
     db.session.commit()
     return redirect(url_for("admin"))
+
+
+
+
+@app.route("/admin")
+def fakeadmin():
+    return render_template("admin.html")

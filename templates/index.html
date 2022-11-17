@@ -16,10 +16,10 @@
             <label>Username:</label>
             <input type="text" id="messageinput" name="Content" required>
             <label>Message:</label>
-            <input type="text" id="usernameinput" name="Username" required>
+            <input type="text" id="usernameinput" name="Username"  required>
             <label>URL for image:</label>
             <input type="url" id="imgurlinput" name="imgurl">
-            <input id="sub" type="submit" required value="Submit message" >
+            <input id="sub" type="submit" required value="Submit message">
        </form>
 
 
@@ -28,15 +28,13 @@
     <br>
 
     {% for post in posts %}
-    
-    <div id="killyourselfrightnow">  
-    <p><b>{{post.username}}:</b></p>
-    <img id="imgthing" src={{post.imageurl}}>
-    <p>{{post.message}}</p>
-    <p id="datetext"> Nr: {{ post.id }} Posted on:{{post.date_posted}}</p>
+    <div id="killyourselfrightnow">
+        <p><b>{{post.username}}:</b></p>
+        <img id="imgthing" src={{post.imageurl}}>
+        <p>{{post.message}}</p>
+        <p id="datetext">Posted on:{{post.date_posted}}</p>
     </div>
     <br>
-
     {% endfor %}
     </div>
 
