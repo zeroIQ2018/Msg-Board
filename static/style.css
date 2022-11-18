@@ -5,12 +5,11 @@ p{
 
 body {
   
-  color:#800
+  color:#b2b5b4
 }
 
 html {
-  background:#ffe url(fade.png) top repeat-x;
-  background-color: #ffe;
+  background-color: #1d1f21;
 }
 
 table {
@@ -35,6 +34,8 @@ td{
 
 #submissions{
   
+
+  
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -56,13 +57,22 @@ td{
 }
 
 #sub {
-  color: #789922;
-  background-color: #ffe;
+  background-color:#b2b5b4;
+  border: #b2b5b4;
+  color:#282a2e;
 }
 
+#sub:active {
+  background-color:#dbdbdb;
+
+}
+#sub:hover {
+  background-color:#dbdbdb;
+
+}
 
 #killyourselfrightnow{
-  outline: 2px groove #800;
+  background-color: #282a2e;
   justify-content: center;
   width: 20%;
   margin: 0 auto;

@@ -56,7 +56,7 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/admin2", methods=["GET", "POST"])
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
     return render_template("admin.html")
 
@@ -81,6 +81,6 @@ def deleteid():
 
 
 
-@app.route("/admin")
+@app.route("/admin2")
 def fakeadmin():
-    return render_template("admin.html")
+    return render_template("fakeadmin.html")
