@@ -41,6 +41,12 @@ document.getElementById("form").onsubmit = function(){
 a = document.getElementById("imgthing").src;
 
 
+var str = document.getElementById("youtube").src;
+var res = str.split("=");
+var embeddedUrl = "https://www.youtube.com/embed/"+res[1];
+document.getElementById("youtube").src = embeddedUrl;
+
+
 /*
 function ifyoutube(){
 	if(a.startsWith("https://www.youtube.com")) 

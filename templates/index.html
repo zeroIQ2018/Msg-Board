@@ -4,7 +4,7 @@
         <title>Message Board</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
     </head>
@@ -17,7 +17,7 @@
             <input type="text" id="messageinput" name="Content" required>
             <label>Message:</label>
             <input type="text" id="usernameinput" name="Username"  required>
-            <label>URL for image:</label>
+            <label>Add URLs for Images or Youtube videos:</label>
             <input type="url" id="imgurlinput" name="imgurl">
             <input id="sub" type="submit" required value="Submit message">
        </form>
@@ -30,9 +30,15 @@
     {% for post in posts %}
     <div id="killyourselfrightnow">
         <p><b>{{post.username}}:</b></p>
+        {% if post.imageurl.startswith("https://www.youtube.com/") == True %}
+        <iframe src={{post.imageurl}} id="youtube" ></iframe>
+        {% elif post.imageurl == "" %}
+
+        {% else %}
         <img id="imgthing" src={{post.imageurl}}>
+        {% endif %}
         <p>{{post.message}}</p>
-        <p id="datetext">Nr:{{post.id}} Posted on:{{post.date_posted}}</p>
+        <p id="datetext">Nr:{{post.id}} Posted on: {{post.date_posted}}</p>
     </div>
     <br>
     {% endfor %}
