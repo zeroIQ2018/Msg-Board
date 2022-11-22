@@ -1,0 +1,81 @@
+p{
+  font:13px/1.231 arial,helvetica,clean,sans-serif;
+}
+
+
+body {
+  
+  color:#800
+}
+
+html {
+  background:#ffe url(fade.png) top repeat-x;
+  background-color: #ffe;
+}
+
+table {
+  border-collapse: collapse;
+}
+tr { 
+  border: solid;
+  border-width: 15x 
+}
+td{
+    border: solid;
+    border-width: 15x;
+}
+
+
+
+#remove {
+    border-color: white;
+    background-color: white;
+    border-inline-color: white;
+}
+
+#submissions{
+  
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  
+}
+
+#datetext {
+  font-size: 10px;
+}
+
+#gets{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+#sub {
+  color: #789922;
+  background-color: #ffe;
+}
+
+
+#killyourselfrightnow{
+  outline: 2px groove #800;
+  justify-content: center;
+  width: 20%;
+  margin: 0 auto;
+}
+
+
+#imgthing{
+  height: 100%; 
+  width: 100%; 
+  object-fit: contain
+}
+
+
+sub:hover {
+  background-color: #bdbdbd;
+}

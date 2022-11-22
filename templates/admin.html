@@ -4,7 +4,8 @@
         <title>Very secure admin terminal</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+        <link id="darkmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='darkmode.css') }}" disabled>
+        <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" disabled>
     </head>
     <body>
         <h1>Very secure admin terminal</h1>
@@ -30,6 +31,8 @@
         <a href="/">
             <button>Return to the board</button>
         </a>
+        
+        <script src="{{ url_for('static', filename='indexjs.js') }}"></script>
 
     </body>
 </html>

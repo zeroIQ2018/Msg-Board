@@ -38,8 +38,15 @@ document.getElementById("form").onsubmit = function(){
 })();
 
 
-a = document.getElementById("imgthing").src;
 
+
+if (localStorage.getItem('mode') == "1") 
+{
+	document.getElementById("darkmode").disabled = false
+}
+else{
+    document.getElementById("lightmode").disabled = false
+}
 
 var str = document.getElementById("youtube").src;
 var res = str.split("=");
@@ -47,14 +54,8 @@ var embeddedUrl = "https://www.youtube.com/embed/"+res[1];
 document.getElementById("youtube").src = embeddedUrl;
 
 
-/*
-function ifyoutube(){
-	if(a.startsWith("https://www.youtube.com")) 
-		{
-			console.log("Test");
-	document.getElementById("imgthing").type = "iframe";
-		}
-}
+console.log(localStorage.getItem("mode"));
 
-window.onload = ifyoutube();
-*/
+
+
+

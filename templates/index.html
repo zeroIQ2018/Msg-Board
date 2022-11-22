@@ -5,7 +5,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge" http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+        <link id="darkmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='darkmode.css') }}" disabled>
+        <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" disabled>
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
     </head>
 
@@ -22,6 +23,9 @@
             <input id="sub" type="submit" required value="Submit message">
        </form>
 
+    <a  href="/options">
+    <button id="sub">Options</button >
+    </a>
 
     <div id="submissions">
     <h2>Posts:</h2>                                                                                                                                                 
@@ -30,7 +34,7 @@
     {% for post in posts %}
     <div id="killyourselfrightnow">
         <p><b>{{post.username}}:</b></p>
-        {% if post.imageurl.startswith("https://www.youtube.com/") == True %}
+        {% if post.imageurl.startswith("https://www.you") == True %}
         <iframe src={{post.imageurl}} id="youtube" ></iframe>
         {% elif post.imageurl == "" %}
 

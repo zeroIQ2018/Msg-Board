@@ -42,18 +42,17 @@ class Message(db.Model):
 
 
 
-@app.route("/add_message", methods=["POST"])
-def add_message():
 
-    message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
-    db.session.add(message)
-    db.session.commit()
-    return redirect(url_for("index"))
 
 @app.route("/", methods=['POST', 'GET'])
 def index():
     posts = Message.query.all()
     return render_template("index.html", posts=posts)
+
+
+@app.route("/admin2")
+def fakeadmin():
+    return render_template("fakeadmin.html")
 
 
 @app.route("/admin", methods=["GET", "POST"])
@@ -79,8 +78,14 @@ def deleteid():
     return redirect(url_for("admin"))
 
 
+@app.route("/add_message", methods=["POST"])
+def add_message():
+    message = Message(request.form["Content"], request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
+    db.session.add(message)
+    db.session.commit()
+    return redirect(url_for("index"))
 
 
-@app.route("/admin2")
-def fakeadmin():
-    return render_template("fakeadmin.html")
+@app.route("/options")
+def options():
+    return render_template("options.html")
