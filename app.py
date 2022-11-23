@@ -39,7 +39,7 @@ class Message(db.Model):
         self.message = message
         self.username = username
         self.date_posted = date_posted
-        self.imageurl= imageurl
+        self.imageurl = imageurl
         
   
 
