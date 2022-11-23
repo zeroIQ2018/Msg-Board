@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+
 import datetime
 import urllib.request 
-
+import os
 
 
 def checkifinternet():
@@ -15,6 +16,9 @@ def checkifinternet():
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.debug = True
+
+
+
 if checkifinternet() == True:
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://vppilujfsfwfbe:82c4177c3e7c07709fa25801f62506bf1bfc8d42a585d48260c57ef4be64c2f8@ec2-52-211-232-23.eu-west-1.compute.amazonaws.com:5432/d9n2b1qv12ouoo"
 elif checkifinternet() == False:

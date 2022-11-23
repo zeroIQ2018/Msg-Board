@@ -40,13 +40,6 @@ document.getElementById("form").onsubmit = function(){
 
 
 
-if (localStorage.getItem('mode') == "1") 
-{
-	document.getElementById("darkmode").disabled = false
-}
-else{
-    document.getElementById("lightmode").disabled = false
-}
 
 var str = document.getElementById("youtube").src;
 var res = str.split("=");
@@ -55,7 +48,5 @@ document.getElementById("youtube").src = embeddedUrl;
 
 
 console.log(localStorage.getItem("mode"));
-
-
 
 
