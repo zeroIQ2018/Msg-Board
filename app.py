@@ -29,6 +29,8 @@ app.config["SECRET_KEY"] = "Pringelsandcoke"
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+
 if checkifinternet() == True:
     app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://vppilujfsfwfbe:82c4177c3e7c07709fa25801f62506bf1bfc8d42a585d48260c57ef4be64c2f8@ec2-52-211-232-23.eu-west-1.compute.amazonaws.com:5432/d9n2b1qv12ouoo"
 elif checkifinternet() == False:
@@ -60,10 +62,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique = True)
     password = db.Column(db.String(80), nullable=False)
 
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
 
 class Signinform(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=40)], render_kw={"placeholder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=40)], render_kw={"placeholder": "Password"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField('Register')
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
