@@ -25,7 +25,12 @@ td{
     border-width: 15x;
 }
 
-
+#middleit{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 #remove {
     border-color: white;

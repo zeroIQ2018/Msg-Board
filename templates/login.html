@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" >
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1 id="middleit">Login</h1>
     
-    <form>
-        <label>Username</label>
-        <input type="text" name="loginusername">
-
-        <label>Password</label>
-        <input type="password" name="loginpassword">
-
-        <input type="submit" name="submitlogin" >
+    <form method="POST" action="" id="middleit">
+        {{form.hidden_tag()}}
+        {{form.username}}
+        <br>
+        {{form.password}}
+        <br>
+        {{form.submit}}
     </form>
+
+    <a href="/signup">If you dont have an account you can create an account</a>
 </body>
 </html>
