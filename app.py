@@ -47,7 +47,7 @@ class Message(db.Model):
     message = db.Column(db.String(2000))
     username = db.Column(db.String(20))
     date_posted = db.Column(db.String(50))
-    imageurl = db.Column(db.String(2000))
+    imageurl = db.Column(db.String(5000))
 
 
     def __init__(self, username, message, date_posted, imageurl):
