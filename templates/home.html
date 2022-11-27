@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" >
+    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" disabled>
+    <link id="darkmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='darkmode.css') }}" disabled>
 </head>
 <body>
     <h1>Flask Message Board</h1>
@@ -16,5 +17,16 @@
     <a href="/logout">Logout</a>
     <br>
     <a href="/board">Message board</a>
+
+    <script>
+        if (localStorage.getItem('mode') == "1") 
+            {
+                document.getElementById("darkmode").disabled = false;
+            }
+        else {
+                document.getElementById("lightmode").disabled = false;
+            }
+
+    </script>
 </body>
 </html>

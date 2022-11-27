@@ -103,7 +103,6 @@ def add_message():
     return redirect(url_for("board"))
 
 @app.route("/options" ,methods=["GET", "POST"])
-@login_required
 def options():
     return render_template("options.html")
 

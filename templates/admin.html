@@ -41,5 +41,16 @@
         
         <script src="{{ url_for('static', filename='indexjs.js') }}"></script>
 
+        <script>
+            if (localStorage.getItem('mode') == "1") 
+                {
+                    document.getElementById("darkmode").disabled = false;
+                }
+            else {
+                    document.getElementById("lightmode").disabled = false;
+                }
+    
+        </script>
+
     </body>
 </html>

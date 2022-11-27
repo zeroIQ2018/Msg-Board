@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" >
+    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" disabled>
+    <link id="darkmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='darkmode.css') }}" disabled>
+
     <title>Options</title>
 </head>
 <body>
@@ -15,5 +17,16 @@
     <button id="sub" onclick="darkmode()">Dark Mode</button>
 
     <script src="{{ url_for('static', filename='options.js') }}"></script>
+
+    <script>
+        if (localStorage.getItem('mode') == "1") 
+            {
+                document.getElementById("darkmode").disabled = false;
+            }
+        else {
+                document.getElementById("lightmode").disabled = false;
+            }
+
+    </script>
 </body>
 </html>
