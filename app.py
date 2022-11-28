@@ -72,7 +72,7 @@ class Signinform(FlaskForm):
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
-            raise ValidationError('That username already exists. Please choose a different one.')
+            return "<a> Please choose a diffrent username </a>"
 
 
 class Loginform(FlaskForm):
@@ -156,7 +156,7 @@ def logout():
 @login_required
 def admin():
     user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" and bcrypt.check_password_hash(user.password, "admin0909"):
+    if current_user.username == "admin0909" :
         return render_template("admin.html")
     else:
         return redirect(url_for("board"))
@@ -164,7 +164,7 @@ def admin():
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
     user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" and bcrypt.check_password_hash(user.password, "admin0909"):
+    if current_user.username == "admin0909" :
             db.session.query(Message).delete()
             db.session.commit()
             return redirect(url_for("board"))
