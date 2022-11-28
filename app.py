@@ -159,7 +159,7 @@ def admin():
     if current_user.username == "admin0909" :
         return render_template("admin.html")
     else:
-        return redirect(url_for("board"))
+        return redirect(url_for("admin"))
 
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
@@ -167,7 +167,7 @@ def delete():
     if current_user.username == "admin0909" :
             db.session.query(Message).delete()
             db.session.commit()
-            return redirect(url_for("board"))
+            return redirect(url_for("admin"))
     else:
         return redirect(url_for("board"))
 
@@ -178,12 +178,12 @@ def delete():
 @app.route("/deleteid", methods=["POST","GET"])
 def deleteid():
     user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" and bcrypt.check_password_hash(user.password, "admin0909"):
+    if current_user.username == "admin0909":
         data = request.form.get('idform', 0)
         int(data)
         Message.query.filter(Message.id == data).delete()
         db.session.commit()
-        return redirect(url_for("board"))
+        return redirect(url_for("admin"))
     else:
         return redirect(url_for("board"))
 
@@ -191,12 +191,12 @@ def deleteid():
 @app.route("/deleteaccount", methods=["POST","GET"])
 def deleteaccount():
     user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" and bcrypt.check_password_hash(user.password, "admin0909"):
+    if current_user.username == "admin0909":
             account = request.form.get("accountid",0)
             int(account)
             User.query.filter(User.id == account).delete()
             db.session.commit()
-            return redirect(url_for("board"))
+            return redirect(url_for("admin"))
     else:
         return redirect(url_for("board"))
 
