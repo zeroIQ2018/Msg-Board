@@ -16,6 +16,7 @@ html {
 table {
   border-collapse: collapse;
 }
+
 tr { 
   border: solid;
   border-width: 15x 
@@ -81,6 +82,21 @@ td{
 }
 
 
-sub:hover {
+#sub:hover {
   background-color: #bdbdbd;
+}
+
+
+#textx {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#spacing {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;;
 }

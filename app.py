@@ -7,7 +7,7 @@ import urllib.request
 import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length
 from flask_bcrypt import Bcrypt
 
 def checkifinternet():
@@ -32,7 +32,7 @@ login_manager.login_view = 'login'
 
 
 if checkifinternet() == True:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://jhicjctonxlntk:1a28ed11d506db1432241de6ccae0c4aa53e6d8a6f8f34d98ebf5e8e04520acc@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d2tu9lis57lehf"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://sudfdevbkopxuq:a2f580b160a680484202805e0c8cf8d5afc5491d232e1cfca91288fcee8f1561@ec2-54-220-86-118.eu-west-1.compute.amazonaws.com:5432/dac84lsu9epl14"
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
@@ -63,6 +63,21 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(2000), nullable=False)
 
 
+#class Comment(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    commes = db.Column(db.String(2000))
+#    message = db.Column(db.String(2000))
+#    username = db.Column(db.String(20))
+#    date_posted = db.Column(db.String(50))
+#    imageurl = db.Column(db.String(5000))
+
+
+#    def __init__(self, username, message, date_posted, imageurl):
+#        self.message = message
+#        self.username = username
+#        self.date_posted = date_posted
+#        self.imageurl = imageurl
+
 
 
 class Signinform(FlaskForm):
@@ -92,7 +107,8 @@ def index():
 @app.route("/board", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-    return render_template("board.html", posts=posts)
+    curuser = current_user.username
+    return render_template("board.html", posts=posts, curuser=curuser)
 
 @app.route("/add_message", methods=["GET", "POST"])
 @login_required
@@ -106,7 +122,13 @@ def add_message():
 def options():
     return render_template("options.html")
 
-
+#@app.route("/add_comment", methods=["GET", "POST"])
+#@login_required
+#def add_comment():
+#    comment = Comment(current_user.username , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
+#    db.session.add(message)
+#    db.session.commit()
+#    return redirect(url_for("board"))
 
 
 
@@ -183,7 +205,7 @@ def deleteid():
         int(data)
         Message.query.filter(Message.id == data).delete()
         db.session.commit()
-        return redirect(url_for("board"))
+        return redirect(url_for("boa3rd"))
     else:
         return redirect(url_for("board"))
 

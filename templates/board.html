@@ -22,15 +22,17 @@
             <input type="url" id="imgurlinput" name="imgurl">
             <input id="sub" type="submit" required value="Submit message">
        </form>
+       <br>
+
 
     <a  href="/options">
     <button id="sub">Options</button >
     </a>
+    <label>Current User: {{curuser}}</label>
 
     <div id="submissions">
     <h2>Posts:</h2>                                                                                                                                                 
     <br>
-
     {% for post in posts %}
     <div id="killyourselfrightnow">
         <p><b>{{post.username}}:</b></p>
