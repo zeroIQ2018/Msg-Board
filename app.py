@@ -107,8 +107,8 @@ def index():
 @app.route("/board", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-    curuser = current_user.username
-    return render_template("board.html", posts=posts, curuser=curuser)
+#    curuser = current_user.username
+    return render_template("board.html", posts=posts)
 
 @app.route("/add_message", methods=["GET", "POST"])
 @login_required
