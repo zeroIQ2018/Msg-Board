@@ -68,10 +68,10 @@ class User(db.Model, UserMixin):
 #    commes = db.Column(db.String(2000))
 #    message = db.Column(db.String(2000))
 #    username = db.Column(db.String(20))
-#    date_posted = db.Column(db.String(50))
+#   date_posted = db.Column(db.String(50))
 #    imageurl = db.Column(db.String(5000))
-
-
+#
+#
 #    def __init__(self, username, message, date_posted, imageurl):
 #        self.message = message
 #        self.username = username
@@ -107,8 +107,8 @@ def index():
 @app.route("/board", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-#    curuser = current_user.username
-    return render_template("board.html", posts=posts)
+    curuser = current_user.username
+    return render_template("board.html", posts=posts, curuser=curuser)
 
 @app.route("/add_message", methods=["GET", "POST"])
 @login_required
