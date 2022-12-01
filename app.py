@@ -180,16 +180,15 @@ def logout():
 @app.route("/admin", methods=["GET", "POST"])
 @login_required
 def admin():
-    user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" :
+
+    if current_user.username == "admin0909" or "Konradmin" :
         return render_template("admin.html")
     else:
         return redirect(url_for("admin"))
 
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
-    user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909" :
+    if current_user.username == "admin0909" or "Konradmin" :
             db.session.query(Message).delete()
             db.session.commit()
             return redirect(url_for("admin"))
@@ -202,8 +201,7 @@ def delete():
 
 @app.route("/deleteid", methods=["POST","GET"])
 def deleteid():
-    user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909":
+    if current_user.username == "admin0909" or "Konradmin" :
         data = request.form.get('idform', 0)
         int(data)
         Message.query.filter(Message.id == data).delete()
@@ -215,8 +213,7 @@ def deleteid():
 
 @app.route("/deleteaccount", methods=["POST","GET"])
 def deleteaccount():
-    user = User.query.filter_by(username="admin0909").first()
-    if current_user.username == "admin0909":
+    if current_user.username == "admin0909" or "Konradmin" :
             account = request.form.get("accountid",0)
             int(account)
             User.query.filter(User.id == account).delete()
