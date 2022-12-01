@@ -63,22 +63,24 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(2000), nullable=False)
 
 
-#class Comment(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    commes = db.Column(db.String(2000))
-#    message = db.Column(db.String(2000))
-#    username = db.Column(db.String(20))
-#   date_posted = db.Column(db.String(50))
-#    imageurl = db.Column(db.String(5000))
-#
-#
-#    def __init__(self, username, message, date_posted, imageurl):
-#        self.message = message
-#        self.username = username
-#        self.date_posted = date_posted
-#        self.imageurl = imageurl
+"""""
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.String(2000))
+    username = db.Column(db.String(20))
+    date_posted = db.Column(db.String(50))
+    imageurl = db.Column(db.String(5000))
+    comesid = db.Column(db.String(1000))
 
 
+
+    def __init__(self, username, message, date_posted, imageurl, comesid):
+        self.message = message
+        self.username = username
+        self.date_posted = date_posted
+        self.imageurl = imageurl
+        self.comesid = comesid
+"""""
 
 class Signinform(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
@@ -107,8 +109,7 @@ def index():
 @app.route("/board", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-    curuser = current_user.username
-    return render_template("board.html", posts=posts, curuser=curuser)
+    return render_template("board.html", posts=posts, curuser=current_user)
 
 @app.route("/add_message", methods=["GET", "POST"])
 @login_required
@@ -122,14 +123,16 @@ def add_message():
 def options():
     return render_template("options.html")
 
-#@app.route("/add_comment", methods=["GET", "POST"])
-#@login_required
-#def add_comment():
-#    comment = Comment(current_user.username , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
-#    db.session.add(message)
-#    db.session.commit()
-#    return redirect(url_for("board"))
 
+"""""
+@app.route("/add_comment", methods=["GET", "POST"])
+@login_required
+def add_comment():
+    comment = Comment(current_user.username , request.form["comus"], datetime.datetime.now(), request.form["comimgurl"], request.form["comesid"])
+    db.session.add(comment)
+    db.session.commit()
+    return redirect(url_for("board"))
+"""""
 
 
 #LOGIN AND SIGNUP STUFF
