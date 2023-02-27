@@ -45,7 +45,7 @@ def load_user(user_id):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000))
-    username = db.Column(db.String(20))
+    username = db.Column(db.String(200))
     date_posted = db.Column(db.String(50))
     imageurl = db.Column(db.String(5000))
 
@@ -102,11 +102,11 @@ class Loginform(FlaskForm):
 
 
 #MAIN ADDING MESSAGES AND OTHER STUFF
-@app.route("/", methods=['POST', 'GET'])
-def index():
-    return render_template("home.html")
+#@app.route("/", methods=['POST', 'GET'])
+#def index():
+#    return render_template("home.html")
 
-@app.route("/board", methods=["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
     return render_template("board.html", posts=posts, curuser=current_user)
