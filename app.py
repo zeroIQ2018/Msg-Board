@@ -32,7 +32,7 @@ login_manager.login_view = 'login'
 
 
 if checkifinternet() == True:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgressql://pbmycboxmbjeqq:f7e0d3a3e6acaafa2f6179bc4a94b9b715e475b0d2e6bc488dbf3e5838365e45@ec2-52-31-77-218.eu-west-1.compute.amazonaws.com:5432/dfjqls4e0ft7ub"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://pbmycboxmbjeqq:f7e0d3a3e6acaafa2f6179bc4a94b9b715e475b0d2e6bc488dbf3e5838365e45@ec2-52-31-77-218.eu-west-1.compute.amazonaws.com:5432/dfjqls4e0ft7ub"
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
