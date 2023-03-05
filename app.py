@@ -184,7 +184,7 @@ def admin():
     if current_user.username == "admin0909" or "Konradmin" :
         return render_template("admin.html")
     else:
-        return redirect(url_for("admin"))
+        return redirect(url_for("board"))
 
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
