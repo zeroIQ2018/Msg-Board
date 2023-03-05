@@ -32,7 +32,7 @@ login_manager.login_view = 'login'
 
 
 if checkifinternet() == True:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://sudfdevbkopxuq:a2f580b160a680484202805e0c8cf8d5afc5491d232e1cfca91288fcee8f1561@ec2-54-220-86-118.eu-west-1.compute.amazonaws.com:5432/dac84lsu9epl14"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://pbmycboxmbjeqq:f7e0d3a3e6acaafa2f6179bc4a94b9b715e475b0d2e6bc488dbf3e5838365e45@ec2-52-31-77-218.eu-west-1.compute.amazonaws.com:5432/dfjqls4e0ft7ub"
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
@@ -45,7 +45,7 @@ def load_user(user_id):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000))
-    username = db.Column(db.String(20))
+    username = db.Column(db.String(200))
     date_posted = db.Column(db.String(50))
     imageurl = db.Column(db.String(5000))
 
@@ -102,11 +102,11 @@ class Loginform(FlaskForm):
 
 
 #MAIN ADDING MESSAGES AND OTHER STUFF
-@app.route("/", methods=['POST', 'GET'])
-def index():
-    return render_template("home.html")
+#@app.route("/", methods=['POST', 'GET'])
+#def index():
+#    return render_template("home.html")
 
-@app.route("/board", methods=["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
     return render_template("board.html", posts=posts, curuser=current_user)
