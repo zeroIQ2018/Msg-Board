@@ -23,7 +23,7 @@ document.getElementById("form").onsubmit = function(){
 }
 
 
-var str = document.getElementById("imgthing").src;
+var str = document.getElementById("jhjjjkkjjkj").src;
 var res = str.split("=");
 var embeddedUrl = "https://www.youtube.com/embed/"+res[1];
 document.getElementById("imgthing").src = embeddedUrl;
