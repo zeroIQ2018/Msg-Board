@@ -181,14 +181,14 @@ def logout():
 @login_required
 def admin():
 
-    if current_user.username == "admin0909" or "Konradmin" :
+    if User.get_id == "4" or "12" :
         return render_template("admin.html")
     else:
         return redirect(url_for("board"))
 
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
-    if current_user.username == "admin0909" or "Konradmin" :
+    if User.get_id == "4" or "12" :
             db.session.query(Message).delete()
             db.session.commit()
             return redirect(url_for("admin"))
@@ -201,7 +201,7 @@ def delete():
 
 @app.route("/deleteid", methods=["POST","GET"])
 def deleteid():
-    if current_user.username == "admin0909" or "Konradmin" :
+    if User.get_id == "4" or "12" :
         data = request.form.get('idform', 0)
         int(data)
         Message.query.filter(Message.id == data).delete()
@@ -213,7 +213,7 @@ def deleteid():
 
 @app.route("/deleteaccount", methods=["POST","GET"])
 def deleteaccount():
-    if current_user.username == "admin0909" or "Konradmin" :
+    if User.get_id == "4" or "12" :
             account = request.form.get("accountid",0)
             int(account)
             User.query.filter(User.id == account).delete()
