@@ -33,7 +33,7 @@ login_manager.login_view = 'login'
 
 
 if checkifinternet() == True:
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL').replace("://", "postgressql://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL').replace("postgressql://", "://", 1)
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
