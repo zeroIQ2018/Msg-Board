@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length
 from flask_bcrypt import Bcrypt
+from urllib.parse import urlparse
 
 def checkifinternet():
     try:
@@ -32,7 +33,7 @@ login_manager.login_view = 'login'
 
 
 if checkifinternet() == True:
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 elif checkifinternet() == False:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
