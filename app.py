@@ -4,12 +4,11 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 import datetime
 import os
 import urllib.request 
-import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length
 from flask_bcrypt import Bcrypt
-from urllib.parse import urlparse
+from flask_wtf.csrf import CSRFError
 
 def checkifinternet():
     try:
@@ -72,7 +71,7 @@ class Signinform(FlaskForm):
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
-            return "<a> Please choose a diffrent username </a>"
+            return render_template("error.html")
 
 
 class Loginform(FlaskForm):
@@ -144,7 +143,9 @@ def logout():
     return redirect(url_for('login'))
 
 
-
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('error.html', reason=e.description), 400
 
 
 
