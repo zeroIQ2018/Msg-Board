@@ -143,6 +143,12 @@ def logout():
     return redirect(url_for('login'))
 
 
+#ERROR
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
     return render_template('error.html', reason=e.description), 400
