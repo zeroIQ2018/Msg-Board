@@ -24,7 +24,7 @@ bcrypt = Bcrypt(app)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.debug = True
 app.config["DEBUG_MODE"] = True
-app.config["SECRET_KEY"] = "Pringelsandcoke"
+app.config["SECRET_KEY"] = "FLASKMSGBOARD"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -149,9 +149,9 @@ def logout():
 def not_found_error(error):
     return render_template('404.html'), 404
 
-@app.errorhandler(505)
+@app.errorhandler(500)
 def intserverror(error):
-    return render_template('505.html'), 505
+    return render_template('500.html'), 500
 
 
 
