@@ -71,7 +71,7 @@ class Signinform(FlaskForm):
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
-            return render_template("error.html")
+            return redirect(url_for("usernamealreadyexists"))
 
 
 class Loginform(FlaskForm):
@@ -143,7 +143,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-#ERROR
+#ERROR HANDELING
 
 @app.errorhandler(404)
 def not_found_error(error):
@@ -154,7 +154,9 @@ def intserverror(error):
     return render_template('500.html'), 500
 
 
-
+@app.route("/usernamealreadyexists")
+def usernamealreadyexists():
+    return render_template("error.html")
 
 
 
