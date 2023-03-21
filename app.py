@@ -150,7 +150,7 @@ def not_found_error(error):
     return render_template('404.html'), 404
 
 @app.errorhandler(505)
-def not_found_error(error):
+def intserverror(error):
     return render_template('505.html'), 505
 
 
