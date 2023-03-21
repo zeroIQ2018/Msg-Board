@@ -16,5 +16,15 @@
     <br>
     <p>Try the normal www.flaskboard.works/</p>
 </body>
+<script>
+    if (localStorage.getItem('mode') == "1") 
+        {
+            document.getElementById("darkmode").disabled = false;
+        }
+    else {
+            document.getElementById("lightmode").disabled = false;
+        }
+
+</script>
 
 </html>
