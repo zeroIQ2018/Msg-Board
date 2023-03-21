@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="lightmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='lightmode.css') }}" disabled>
+    <link id="darkmode" rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='darkmode.css') }}" disabled>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
+    <title>505 Error</title>
+</head>
+
+<body>
+    <h1>505 Error</h1>
+    <p>Some internal server error happened</p>
+    <br>
+    <p>You probably entered an already used name when creating an account</p>
+</body>
+<script>
+    if (localStorage.getItem('mode') == "1") 
+        {
+            document.getElementById("darkmode").disabled = false;
+        }
+    else {
+            document.getElementById("lightmode").disabled = false;
+        }
+
+</script>
+
+</html>

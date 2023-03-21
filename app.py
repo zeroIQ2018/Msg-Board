@@ -149,9 +149,11 @@ def logout():
 def not_found_error(error):
     return render_template('404.html'), 404
 
-@app.errorhandler(CSRFError)
-def handle_csrf_error(e):
-    return render_template('error.html', reason=e.description), 400
+@app.errorhandler(505)
+def not_found_error(error):
+    return render_template('505.html'), 505
+
+
 
 
 
