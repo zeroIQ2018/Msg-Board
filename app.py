@@ -111,7 +111,7 @@ def signup():
     form = Signinform()
 
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8") 
+        hashed_password = form.password.data
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
@@ -128,7 +128,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
+            if user.password == form.password.data:
                 login_user(user)
                 return redirect(url_for('board'))
 
