@@ -48,7 +48,7 @@
     <h2>Posts:</h2>                                                                                                                                                 
     <br>
     {% for post in posts %}
-    <div id="killyourselfrightnow">
+    <div id="posts">
         <p><b>{{post.username}}:</b></p>
         {% if post.imageurl.startswith("https://www.you") == True %}
         <iframe src={{post.imageurl}} id="youtube" ></iframe>
