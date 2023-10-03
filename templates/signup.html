@@ -11,14 +11,14 @@
 </head>
 <body>
         <h1 id="middleit">Signup</h1>
-        <form method="POST" action="" id="middleit">
-            {{form.hidden_tag()}}
-            {{form.username}}
-            <br>
-            {{form.password}}
-            <br>
-            {{form.submit}}
-        </form>
+
+        <form method="POST"  id="middleit">
+            <label>Username:</label>
+            <input type="text" id="usernameinput" name="RegUsername"  required>
+            <label>Password:</label>
+            <input type="password" id="imgurlinput" name="RegPassword" required>
+            <input id="sub" type="submit" required value="Create Account">
+       </form>
 
 
         <script>
@@ -29,7 +29,7 @@
             else {
                     document.getElementById("lightmode").disabled = false;
                 }
-    
+            reload()
         </script>
 </body>
 </html>

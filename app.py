@@ -1,14 +1,11 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import datetime
 import os
 import urllib.request 
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length
-from flask_bcrypt import Bcrypt
-from flask_wtf.csrf import CSRFError
+from flask_bcrypt import Bcrypt, check_password_hash
+
+
 
 def checkifinternet():
     try:
@@ -26,21 +23,14 @@ app.debug = True
 app.config["DEBUG_MODE"] = True
 app.config["SECRET_KEY"] = "FLASKMSGBOARD"
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
 
-
-if checkifinternet() == True:
+if os.getenv('DATABASE_URL') is not None:
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
-elif checkifinternet() == False:
+else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,27 +47,21 @@ class Message(db.Model):
         self.imageurl = imageurl
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(2000), nullable=False, unique = True)
     password = db.Column(db.String(2000), nullable=False)
+    accountcreated = db.Column(db.String(50))
+    def __init__(self, username, password, accountcreated):
+        self.username = username
+        self.password = password
+        self.accountcreated = accountcreated
 
 
 
-class Signinform(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
-    submit = SubmitField('Register')
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(username=username.data).first()
-        if existing_user_username:
-            return redirect(url_for("usernamealreadyexists"))
 
 
-class Loginform(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
-    submit = SubmitField('Login')
+
 
 
 
@@ -88,15 +72,16 @@ class Loginform(FlaskForm):
 @app.route("/", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-    return render_template("board.html", posts=posts, curuser=current_user)
+    if request.method == "POST" and "username" not in session:
+        return render_template("board.html", posts=posts, curposts=posts, curuser="Not logged in")
+    if request.method == 'POST' and "username" in session:
+        message = Message(session['username'] , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
+        db.session.add(message)
+        db.session.commit()
+        return redirect(url_for("board"))
+    else:
+        return render_template("board.html", posts=posts, curuser="Not logged in")
 
-@app.route("/add_message", methods=["GET", "POST"])
-@login_required
-def add_message():
-    message = Message(current_user.username , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
-    db.session.add(message)
-    db.session.commit()
-    return redirect(url_for("board"))
 
 @app.route("/options" ,methods=["GET", "POST"])
 def options():
@@ -108,39 +93,49 @@ def options():
 #LOGIN AND SIGNUP STUFF
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    form = Signinform()
-
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8") 
-        new_user = User(username=form.username.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
+    test = User.query.all()
+    if request.method == 'POST':
+        new_user = User(request.form["RegUsername"] , bcrypt.generate_password_hash(request.form["RegPassword"]).decode("utf-8"), datetime.datetime.now() )
+        if request.form["RegUsername"] in test:
+            return redirect(url_for("usernamealreadyexists"))
+        else:
+            db.session.add(new_user)
+            db.session.commit()
         return redirect(url_for('login'))
+    return render_template('signup.html', )
 
-
-    return render_template('signup.html', form=form)
 
 @app.route("/login" , methods=["GET", "POST"])
 def login():
-    form = Loginform()
+    if request.method == 'POST':
+        u = User.query.filter_by(username=request.form["LogUsername"]).one()
+        print(request.form["LogUsername"])
+        print(u.password)
+        if bool(User.query.filter_by(username=request.form["LogUsername"]).first()) == True and bool(check_password_hash(u.password, request.form["LogPassword"]) ) == True:
+            session['username'] = request.form['LogUsername']
+            
+            # will do later
+            return redirect(url_for('board'))
+        else:
 
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect(url_for('board'))
+            return redirect(url_for('login'))
 
 
-    return render_template("login.html", form=form)
+
+
+    return render_template("login.html")
+
+
+
 
 
 @app.route('/logout', methods=['GET', 'POST'])
-@login_required
+#only available if login do later fr fr
 def logout():
-    logout_user()
-    return redirect(url_for('login'))
+    if "username" in session:
+        session.pop("username", None)
+    return redirect(url_for('board'))
 
 
 #ERROR HANDELING

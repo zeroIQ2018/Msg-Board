@@ -15,7 +15,7 @@
     <h1>Message Board</h1>
 
     <body>
-        <form method="POST" action="/add_message" id="form">
+        <form method="POST" id="form">
             <label>Message:</label>
             <input type="text" id="usernameinput" name="Username"  required>
             <label>Add URLs for Images or Youtube videos:</label>
@@ -42,7 +42,7 @@
         <button id="sub">logout</button >
     </a>
     <br>
-    <label>Current User: {{ curuser.username }}</label>
+    <label>Current User: {{ curuser }}</label>
     
     <div id="submissions">
     <h2>Posts:</h2>                                                                                                                                                 
@@ -67,6 +67,7 @@
     <a href="https://github.com/zeroIQ2018/Msg-Board">Github Repository Flaskboard</a>
 
     <script>
+         
         if (localStorage.getItem('mode') == "1") 
             {
                 document.getElementById("darkmode").disabled = false;
@@ -74,7 +75,7 @@
         else {
                 document.getElementById("lightmode").disabled = false;
             }
-
+        reload()
     </script>
     <script src="{{ url_for('static', filename='indexjs.js') }}"></script>
     </body>
