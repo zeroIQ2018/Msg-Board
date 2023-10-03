@@ -80,7 +80,7 @@ def board():
         db.session.commit()
         return redirect(url_for("board"))
     else:
-        return render_template("board.html", posts=posts, curuser="Not logged in")
+        return render_template("board.html", posts=posts, curuser=session['username'])
 
 
 @app.route("/options" ,methods=["GET", "POST"])
