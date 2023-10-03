@@ -78,8 +78,7 @@ def board():
         message = Message(session['username'] , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
         db.session.add(message)
         db.session.commit()
-        return redirect(url_for("board"))
-    return render_template("board.html", posts=posts, curuser=session['username'])
+        return render_template("board.html", posts=posts, curuser=session['username'])
 
 
 @app.route("/options" ,methods=["GET", "POST"])
