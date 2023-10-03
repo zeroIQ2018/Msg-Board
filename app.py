@@ -72,12 +72,14 @@ class User(db.Model):
 @app.route("/", methods=["POST", "GET"])
 def board():
     posts = Message.query.all()
-    if request.method == "POST" and "username" not in session:
-        return render_template("board.html", posts=posts, curposts=posts, curuser="Not logged in")
+    if "username" not in session:
+        return render_template("board.html", posts=posts, curuser="Not logged in")
+
     if request.method == 'POST' and "username" in session:
         message = Message(session['username'] , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
         db.session.add(message)
         db.session.commit()
+    if "username" in session:
         return render_template("board.html", posts=posts, curuser=session['username'])
 
 
@@ -115,9 +117,9 @@ def login():
             # will do later
             return redirect(url_for('board'))
         else:
-
-
             return redirect(url_for('login'))
+
+
 
 
 
