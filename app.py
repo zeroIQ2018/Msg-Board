@@ -79,6 +79,7 @@ def board():
         message = Message(session['username'] , request.form["Username"], datetime.datetime.now(), request.form["imgurl"])
         db.session.add(message)
         db.session.commit()
+        return redirect(url_for("board"))
     if "username" in session:
         return render_template("board.html", posts=posts, curuser=session['username'])
 

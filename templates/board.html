@@ -47,7 +47,7 @@
     <div id="submissions">
     <h2>Posts:</h2>                                                                                                                                                 
     <br>
-    {% for post in posts %}
+    {% for post in posts[::-1]  %}
     <div id="posts">
         <p><b>{{post.username}}:</b></p>
         {% if post.imageurl.startswith("https://www.you") == True %}
